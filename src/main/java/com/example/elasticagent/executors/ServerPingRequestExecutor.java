@@ -22,7 +22,7 @@ import com.thoughtworks.go.plugin.api.response.GoPluginApiResponse;
 
 import java.util.Collection;
 
-import static com.example.elasticagent.ExamplePlugin.LOG;
+import static com.example.elasticagent.MesosPlugin.LOG;
 
 public class ServerPingRequestExecutor implements RequestExecutor {
 

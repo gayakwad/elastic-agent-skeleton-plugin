@@ -21,18 +21,18 @@ import com.example.elasticagent.requests.CreateAgentRequest;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class ExampleAgentInstances implements AgentInstances<ExampleInstance> {
+public class MesosAgentInstances implements AgentInstances<MesosInstance> {
 
-    private final ConcurrentHashMap<String, ExampleInstance> instances = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, MesosInstance> instances = new ConcurrentHashMap<>();
 
     private boolean refreshed;
     public Clock clock = Clock.DEFAULT;
 
     @Override
-    public ExampleInstance create(CreateAgentRequest request, PluginSettings settings) throws Exception {
+    public MesosInstance create(CreateAgentRequest request, PluginSettings settings) throws Exception {
         // TODO: Implement me!
         throw new UnsupportedOperationException();
-//        ExampleInstance instance = ExampleInstance.create(request, settings);
+//        MesosInstance instance = MesosInstance.create(request, settings);
 //        register(instance);
 //        return instance;
     }
@@ -42,7 +42,7 @@ public class ExampleAgentInstances implements AgentInstances<ExampleInstance> {
         // TODO: Implement me!
         throw new UnsupportedOperationException();
 
-//        ExampleInstance instance = instances.get(agentId);
+//        MesosInstance instance = instances.get(agentId);
 //        if (instance != null) {
 //            instance.terminate(docker(settings));
 //        } else {
@@ -56,13 +56,13 @@ public class ExampleAgentInstances implements AgentInstances<ExampleInstance> {
         // TODO: Implement me!
         throw new UnsupportedOperationException();
 
-//        ExampleAgentInstances toTerminate = unregisteredAfterTimeout(settings, agents);
+//        MesosAgentInstances toTerminate = unregisteredAfterTimeout(settings, agents);
 //        if (toTerminate.instances.isEmpty()) {
 //            return;
 //        }
 //
 //        LOG.warn("Terminating instances that did not register " + toTerminate.instances.keySet());
-//        for (ExampleInstance container : toTerminate.instances.values()) {
+//        for (MesosInstance container : toTerminate.instances.values()) {
 //            terminate(container.name(), settings);
 //        }
     }
@@ -72,7 +72,7 @@ public class ExampleAgentInstances implements AgentInstances<ExampleInstance> {
     public Agents instancesCreatedAfterTimeout(PluginSettings settings, Agents agents) {
         ArrayList<Agent> oldAgents = new ArrayList<>();
         for (Agent agent : agents.agents()) {
-            ExampleInstance instance = instances.get(agent.elasticAgentId());
+            MesosInstance instance = instances.get(agent.elasticAgentId());
             if (instance == null) {
                 continue;
             }
@@ -94,14 +94,14 @@ public class ExampleAgentInstances implements AgentInstances<ExampleInstance> {
 //            TODO: Most cloud providers allow applying some sort of labels or tags to instances that you may find of use
 //            List<InstanceInfo> instanceInfos = cloud.listInstances().filter(...)
 //            for (Instance instanceInfo: instanceInfos) {
-//                  register(ExampleInstance.fromInstanceInfo(instanceInfo))
+//                  register(MesosInstance.fromInstanceInfo(instanceInfo))
 //            }
 //            refreshed = true;
 //        }
     }
 
     @Override
-    public ExampleInstance find(String agentId) {
+    public MesosInstance find(String agentId) {
         return instances.get(agentId);
     }
 
@@ -110,13 +110,13 @@ public class ExampleAgentInstances implements AgentInstances<ExampleInstance> {
         return instances.containsKey(agentId);
     }
 
-    private void register(ExampleInstance instance) {
+    private void register(MesosInstance instance) {
         instances.put(instance.name(), instance);
     }
 
-//    private ExampleAgentInstances unregisteredAfterTimeout(PluginSettings settings, Agents knownAgents) throws Exception {
+//    private MesosAgentInstances unregisteredAfterTimeout(PluginSettings settings, Agents knownAgents) throws Exception {
 //        Period period = settings.getAutoRegisterPeriod();
-//        ExampleAgentInstances unregisteredContainers = new ExampleAgentInstances();
+//        MesosAgentInstances unregisteredContainers = new MesosAgentInstances();
 //
 //        for (String instanceName : instances.keySet()) {
 //            if (knownAgents.containsAgentWithId(instanceName)) {
@@ -128,7 +128,7 @@ public class ExampleAgentInstances implements AgentInstances<ExampleInstance> {
 //            DateTime dateTimeCreated = new DateTime(instanceInfo.created());
 //
 //            if (clock.now().isAfter(dateTimeCreated.plus(period))) {
-//                unregisteredContainers.register(ExampleInstance.fromInstanceInfo(instanceInfo));
+//                unregisteredContainers.register(MesosInstance.fromInstanceInfo(instanceInfo));
 //            }
 //        }
 //        return unregisteredContainers;

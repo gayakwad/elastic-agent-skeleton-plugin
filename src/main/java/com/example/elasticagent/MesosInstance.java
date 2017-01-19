@@ -21,13 +21,13 @@ import org.joda.time.DateTime;
 import java.util.Date;
 import java.util.Map;
 
-public class ExampleInstance {
+public class MesosInstance {
     private final DateTime createdAt;
     private final Map<String, String> properties;
     private final String environment;
     private String name;
 
-    public ExampleInstance(String name, Date createdAt, Map<String, String> properties, String environment) {
+    public MesosInstance(String name, Date createdAt, Map<String, String> properties, String environment) {
         this.name = name;
         this.createdAt = new DateTime(createdAt);
         this.properties = properties;
@@ -55,7 +55,7 @@ public class ExampleInstance {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ExampleInstance that = (ExampleInstance) o;
+        MesosInstance that = (MesosInstance) o;
 
         return name != null ? name.equals(that.name) : that.name == null;
     }

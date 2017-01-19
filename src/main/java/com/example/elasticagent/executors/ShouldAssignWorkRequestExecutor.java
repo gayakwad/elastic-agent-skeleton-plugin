@@ -17,7 +17,7 @@
 package com.example.elasticagent.executors;
 
 import com.example.elasticagent.AgentInstances;
-import com.example.elasticagent.ExampleInstance;
+import com.example.elasticagent.MesosInstance;
 import com.example.elasticagent.PluginRequest;
 import com.example.elasticagent.RequestExecutor;
 import com.example.elasticagent.requests.ShouldAssignWorkRequest;
@@ -30,11 +30,11 @@ import java.util.Map;
 import static org.apache.commons.lang3.StringUtils.stripToEmpty;
 
 public class ShouldAssignWorkRequestExecutor implements RequestExecutor {
-    private final AgentInstances<ExampleInstance> agentInstances;
+    private final AgentInstances<MesosInstance> agentInstances;
     private final PluginRequest pluginRequest;
     private final ShouldAssignWorkRequest request;
 
-    public ShouldAssignWorkRequestExecutor(ShouldAssignWorkRequest request, AgentInstances<ExampleInstance> agentInstances, PluginRequest pluginRequest) {
+    public ShouldAssignWorkRequestExecutor(ShouldAssignWorkRequest request, AgentInstances<MesosInstance> agentInstances, PluginRequest pluginRequest) {
         this.request = request;
         this.agentInstances = agentInstances;
         this.pluginRequest = pluginRequest;
@@ -42,7 +42,7 @@ public class ShouldAssignWorkRequestExecutor implements RequestExecutor {
 
     @Override
     public GoPluginApiResponse execute() {
-        ExampleInstance instance = agentInstances.find(request.agent().elasticAgentId());
+        MesosInstance instance = agentInstances.find(request.agent().elasticAgentId());
 
         if (instance == null) {
             return DefaultGoPluginApiResponse.success("false");
